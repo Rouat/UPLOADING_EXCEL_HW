@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جدول السائقين</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='main.css')}}">
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 fixed-top">
+        <div class="container">
+            <a href="#home" class="navbar-brand">إدارة ناقلي البضائع</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navmenu">
+                <!-- User Links -->
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a href="{{ url_for('add_driver_excel') }}" class="nav-link">Upload excel file </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for('add_driver') }}" class="nav-link">Add a new driver </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for('home') }}" class="nav-link">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="bg-red text-light p-5 p-lg-0 pt-lg-5 text-center text-sm-start">
+
+    <div class="container my-5 border">
+        <div>     
+               <h1 class="font">جدول السائقين</h1>
+        </div>
+
+        <div class="d-sm-flex align-items-center justify-content-between">
+    <table class=" custom-font">
+        <thead>
+            <tr>
+                <th>الاسم</th>
+                <th>التكلفة</th>
+                <th>الجودة</th>
+                <th>السعة</th>
+                <th>مصروف السيارة</th>
+                <th>موثوقية</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for driver in schedule %}
+            <tr>
+                <td>{{ driver.name }}</td>
+                <td>{{ driver.cost }}</td>
+                <td>{{ driver.quality }}</td>
+                <td>{{ driver.capacity }}</td>
+                <td>{{ driver.fuel_consumption }}</td>
+                <td>{{ driver.reliability }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+        </div>
+        <a class="wide-button"
+        href="{{ url_for('home') }}" >
+        <i class=""></i>العودة للصفحة الرئيسية
+        </a> 
+        
+            <a class="wide-button"
+            href="{{ url_for('generate_schedule_view') }}">
+            <i class=""></i>توليد اجيال جديدة
+           </a>
+         </div>
+    
+    </div>
+</body>
+</html>
